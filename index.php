@@ -1,6 +1,25 @@
 <!doctype html>
 <html lang="en">
   <head>
+  <style>
+body {
+  background-color: linen;
+}
+
+h1 {
+  color: maroon;
+  margin-left: 450px;
+  
+}
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+</style>
     <title>Crud App</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -11,6 +30,7 @@
   </head>
   <body>
   <?php require_once 'process.php'; ?>
+  
   
   <?php 
   if (isset($_SESSION['message'])): ?>
@@ -23,75 +43,14 @@
   ?>
   </div>
   <?php endif ?>
- <!-- Displaying data from php database crud] -->
-  <div class="container">
- 
-  <?php
-     $servername="localhost";
-     $username="root";
-     $password="";
-     $dbname="crud";
-     $con= new mysqli($servername,$username,$password,$dbname); 
-     if ($con->connect_error)
-     {
-         die("connection failed: " . $conn->connect_error);
-     
-     }
-     $Movie_sql1="SELECT * FROM data";
-    $result=$con->query($Movie_sql1);
-     //pre_r($result);
-    ?>
-    
-    <div class="row justify-content-center">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Movie Name</th>
-            <th colspan="2">Action</th>
-            </thead>
-            <?php
-              while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                  <td><?php echo $row['MovieName']; ?></td>
-                  <td>
-                    <a href="index.php?edit=<?php echo $row['ID']; ?>"
-                    class="btn btn-info">Edit</a>
-                    <a href="index.php?delete=<?php echo $row['ID']; ?>"
-                    class="btn btn-danger">Delete</a>
-                  </td>
-                  </tr>
-              <?php endwhile; ?>
-            </table>
-            </div>
-    <?php
-     function pre_r( $array ){
-       echo '<pre>';
-       print_r($array);
-       echo '</pre>';
-     }
+
+  <h1> The Movie List crud application</h1><br>
   
-  ?>
+ <a href="list.php"> Display Movie list</a><br>
+ <a href="createlist.php">Create Movie List</a>
  
-  <!-- Displaying the form -->
-  <div class="row justify-content-center">
-    <form actiom="process.php" method="POST">
-    <input type="hidden" name="ID" value="<?php echo $ID; ?>">
-    <div class="form-group">
-        <label>Movie Name</label>
-        <input type="text" name="MovieName" class="form-control" value="<?php echo $MovieName; ?>" placeholder="Enter your movie name">
-       </div>
-       <div class="form-group">
-       <?php
-       if ($update == true):
-        ?>
-          <button type="submit" class="btn btn-primary" name="update">Update</button>
-       <?php else: ?>
-          <button type="submit" class="btn btn-primary" name="save">Save</button>
-       <?php endif; ?>
-        </div>
-        </form>
-        </div>
-        </div>
+ 
+  
 
       
     <!-- Optional JavaScript -->
